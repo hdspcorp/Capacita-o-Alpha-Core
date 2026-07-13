@@ -24,7 +24,7 @@ async function writeChannel(channel: "published" | "draft", content: Content) {
   const admin = await getAdmin();
   const { error } = await admin
     .from("content_state")
-    .upsert({ channel, data: content as unknown as Record<string, unknown>, updated_at: new Date().toISOString() });
+    .upsert({ channel, data: content as never, updated_at: new Date().toISOString() });
   if (error) throw new Error(error.message);
 }
 

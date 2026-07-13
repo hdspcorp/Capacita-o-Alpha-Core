@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      admin_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          token: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          token?: string
+        }
+        Relationships: []
+      }
+      content_state: {
+        Row: {
+          channel: string
+          data: Json
+          updated_at: string
+        }
+        Insert: {
+          channel: string
+          data: Json
+          updated_at?: string
+        }
+        Update: {
+          channel?: string
+          data?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

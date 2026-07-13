@@ -1,3 +1,4 @@
+import { CheckCircle2, ChevronLeft, ChevronRight, PlayCircle } from "lucide-react";
 import { ytIdFromUrl, type Content } from "@/lib/default-content";
 
 export function VideoPanel({
@@ -28,15 +29,15 @@ export function VideoPanel({
   const yt = ytIdFromUrl(found.url);
   return (
     <article className="flex h-full flex-col">
-      <header className="border-b p-4">
-        <p className="text-xs uppercase tracking-wide text-muted-foreground">
+      <header className="border-b bg-emerald-50/60 p-5">
+        <p className="text-xs font-bold uppercase tracking-wide text-primary">
           {found.group} · {found.menu}
         </p>
-        <h1 className="mt-1 text-xl font-semibold text-foreground">{found.title}</h1>
+        <h1 className="mt-2 text-2xl font-bold text-slate-950">{found.title}</h1>
       </header>
       <div className="flex-1 overflow-auto">
-        <div className="mx-auto max-w-4xl p-4">
-          <div className="aspect-video overflow-hidden rounded-xl border bg-black shadow-sm">
+        <div className="mx-auto max-w-5xl p-5">
+          <div className="aspect-video overflow-hidden rounded-2xl border bg-black shadow-xl shadow-emerald-950/10">
             {yt ? (
               <iframe
                 key={yt}
@@ -56,26 +57,36 @@ export function VideoPanel({
             <button
               onClick={onPrev}
               disabled={!hasPrev}
-              className="rounded-md border px-3 py-2 text-sm hover:bg-muted disabled:opacity-40"
+              className="inline-flex items-center gap-2 rounded-xl border bg-white px-4 py-2.5 text-sm font-semibold hover:bg-muted disabled:opacity-40"
             >
-              ← Anterior
+              <ChevronLeft className="h-4 w-4" /> Anterior
             </button>
             <button
               onClick={onComplete}
-              className={`rounded-md px-3 py-2 text-sm font-medium ${
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold ${
                 isCompleted
-                  ? "border bg-muted text-muted-foreground"
-                  : "bg-primary text-primary-foreground hover:opacity-90"
+                  ? "border bg-emerald-50 text-primary"
+                  : "bg-primary text-primary-foreground shadow-lg shadow-emerald-900/10 hover:opacity-90"
               }`}
             >
-              {isCompleted ? "Concluído ✓" : "Marcar como concluído"}
+              {isCompleted ? (
+                <>
+                  <CheckCircle2 className="h-4 w-4" />
+                  Concluído
+                </>
+              ) : (
+                <>
+                  <PlayCircle className="h-4 w-4" />
+                  Marcar como concluído
+                </>
+              )}
             </button>
             <button
               onClick={onNext}
               disabled={!hasNext}
-              className="rounded-md border px-3 py-2 text-sm hover:bg-muted disabled:opacity-40"
+              className="inline-flex items-center gap-2 rounded-xl border bg-white px-4 py-2.5 text-sm font-semibold hover:bg-muted disabled:opacity-40"
             >
-              Próximo →
+              Próximo <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>
